@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stockex · Stock &amp; Structure Dashboard</title>
+<link rel="icon" type="image/png" href="/static/img/stockex-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand" id="brandHome">
+    <span class="brand-mark" id="brandMark">
+      <img src="/static/img/stockex-logo.png" alt="Stockex" onerror="this.style.display='none'; this.parentElement.textContent='S';">
+    </span>
+    <div class="brand-text">
+      <span class="brand-name">STOCKEX</span>
+      <span class="brand-tagline">Market Structure Intelligence</span>
+    </div>
+  </div>
+
+  <div class="search-wrap">
+    <input id="searchInput" type="text" placeholder="Search a stock — AAPL, TSLA, NABIL.NP…" autocomplete="off">
+    <div id="searchResults" class="search-results hidden"></div>
+  </div>
+
+  <div class="topbar-meta">
+    <div class="topbar-right">
+      <select id="periodSelect" title="History window">
+        <option value="6mo">6M</option>
+        <option value="1y" selected>1Y</option>
+        <option value="2y">2Y</option>
+        <option value="5y">5Y</option>
+      </select>
+      <select id="intervalSelect" title="Candle interval">
+        <option value="1d" selected>1D</option>
+        <option value="1wk">1W</option>
+        <option value="1h">1H</option>
+      </select>
+    </div>
+
+    <span class="topbar-divider"></span>
+
+    <div class="index-badge" id="indexBadge" title="NASDAQ Composite">
+      <span class="index-badge-ticker">IXIC</span>
+      <span class="index-badge-value mono" id="indexBadgeValue">—</span>
+      <span class="index-badge-change mono" id="indexBadgeChange">—</span>
+    </div>
+
+    <span class="topbar-divider"></span>
+
+    <div class="market-status" id="marketStatus">
+      <span class="status-dot"></span>
+      <span id="marketStatusText">—</span>
+    </div>
+
+    <span class="topbar-divider"></span>
+
+    <div class="live-clock mono" id="liveClock">—</div>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ============ HOME VIEW ============ -->
+  <section id="homeView" class="layout">
+    <div class="main-col">
+      <div class="card chart-card">
+        <div class="chart-card-head">
+          <div>
+            <h2 id="homeChartTitle">NASDAQ Composite <span class="ticker-pill">^IXIC</span></h2>
+            <div class="price-line">
+              <span id="homePrice" class="price-big">—</span>
+              <span id="homeChange" class="price-change">—</span>
+            </div>
+          </div>
+        </div>
+        <div id="homeChart" class="chart-area chart-area--tall"></div>
+      </div>
+
+      <div class="card no-select">
+        <h3>Why Stockex</h3>
+        <p class="intro-tagline">Pick your stock with ease.</p>
+        <p class="intro-lead">
+          Search any ticker and Stockex reads the chart for you — order blocks,
+          RSI, MACD, Ichimoku and more — then boils it down to one clear signal
+          with a momentum score, so you know what's going on in seconds.
+        </p>
+        <div class="intro-chips">
+          <span class="intro-chip">Order Blocks</span>
+          <span class="intro-chip">Fair Value Gaps</span>
+          <span class="intro-chip">RSI / MACD Divergence</span>
+          <span class="intro-chip">Ichimoku Cloud</span>
+          <span class="intro-chip">Bollinger Bands</span>
+          <span class="intro-chip">Support / Resistance</span>
+        </div>
+        <div class="intro-disclaimer">⚠ Trade at your own risk.</div>
+      </div>
+    </div>
+
+    <aside class="side-col">
+      <div class="card movers-card">
+        <h3>Top Gainers</h3>
+        <div id="gainersList" class="movers-list"><div class="skeleton"></div></div>
+      </div>
+      <div class="card movers-card">
+        <h3>Top Losers</h3>
+        <div id="losersList" class="movers-list"><div class="skeleton"></div></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ============ TICKER ANALYSIS VIEW ============ -->
+  <section id="tickerView" class="layout hidden">
+    <div class="main-col">
+
+      <div class="card chart-card">
+        <div class="chart-card-head">
+          <div>
+            <h2 id="tkrTitle">—</h2>
+            <div class="price-line">
+              <span id="tkrPrice" class="price-big">—</span>
+              <span id="tkrChange" class="price-change">—</span>
+            </div>
+          </div>
+          <button id="backHomeBtn" class="btn-ghost">← Back to overview</button>
+        </div>
+
+        <div id="tkrChart" class="chart-area chart-area--tall"></div>
+        <div id="tkrSubChart" class="chart-area chart-area--short hidden"></div>
+
+        <div class="toggle-bar" id="overlayToggleBar">
+          <button class="toggle-btn active" data-view="none">Price only</button>
+          <button class="toggle-btn" data-view="orderblock">Order Blocks</button>
+          <button class="toggle-btn" data-view="fvg">FVG</button>
+          <button class="toggle-btn" data-view="rsi">RSI Divergence</button>
+          <button class="toggle-btn" data-view="macd">MACD Divergence</button>
+          <button class="toggle-btn" data-view="bollinger">Bollinger Bands</button>
+          <button class="toggle-btn" data-view="ichimoku">Ichimoku Cloud</button>
+          <button class="toggle-btn" data-view="sr">Support / Resistance</button>
+        </div>
+        <div id="overlayLegend" class="overlay-legend"></div>
+      </div>
+
+      <div class="card no-select">
+        <h3>Indicator Snapshot</h3>
+        <div id="indicatorGrid" class="indicator-grid"></div>
+      </div>
+
+      <div class="card no-select">
+        <h3>Buy / Sell Levels</h3>
+        <div id="tradeLevels" class="trade-levels"></div>
+      </div>
+    </div>
+
+    <aside class="side-col">
+      <div class="card verdict-card no-select">
+        <h3>Final Verdict</h3>
+        <div id="verdictBadge" class="verdict-badge">—</div>
+        <div class="verdict-scale">
+          <div class="verdict-scale-track">
+            <div id="verdictMarker" class="verdict-scale-marker"></div>
+          </div>
+          <div class="verdict-scale-labels">
+            <span>Strong Sell</span><span>Sell</span><span>Neutral</span><span>Buy</span><span>Strong Buy</span>
+          </div>
+        </div>
+        <p id="verdictReason" class="muted small"></p>
+        <div id="verdictBreakdown" class="verdict-breakdown"></div>
+      </div>
+
+      <div class="card gauge-card no-select">
+        <h3>Momentum Gauge</h3>
+        <div id="momentumGauge" class="gauge-wrap"></div>
+        <div id="momentumLabel" class="gauge-label">—</div>
+        <div id="momentumComponents" class="gauge-components"></div>
+      </div>
+
+      <div class="card movers-card">
+        <h3>Top Gainers</h3>
+        <div id="gainersList2" class="movers-list"><div class="skeleton"></div></div>
+      </div>
+      <div class="card movers-card">
+        <h3>Top Losers</h3>
+        <div id="losersList2" class="movers-list"><div class="skeleton"></div></div>
+      </div>
+    </aside>
+  </section>
+
+</main>
+
+<footer class="footer no-select">
+  <span>Trade at your own risk</span>
+  <span class="footer-dot"></span>
+  <span>Data via yfinance</span>
+  <span class="footer-dot"></span>
+  <span>Composite scoring: RSI · MACD · Ichimoku · Order Blocks · Bollinger · S/R</span>
+  <span class="footer-dot"></span>
+  <span>Stockex © 2026</span>
+</footer>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
