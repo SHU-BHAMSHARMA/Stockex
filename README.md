@@ -7,31 +7,31 @@ A modern **Flask-powered stock analysis dashboard** that combines multiple techn
 ## Screenshots
 
 ### Main Dashboard
-![Main Dashboard](stock-analyzer-web/Assets/Main_Dashboard.png)
+![Main Dashboard](stock-analyzer-web/assets/Main_Dashboard.png)
 
 ### AAPL First Look
-![AAPL First Look](stock-analyzer-web/Assets/AAPL_First_Look.png)
+![AAPL First Look](stock-analyzer-web/assets/AAPL_First_Look.png)
 
 ### AAPL Scroll Look
-![AAPL Scroll Look](stock-analyzer-web/Assets/AAPL_Scroll_Look.png)
+![AAPL Scroll Look](stock-analyzer-web/assets/AAPL_Scroll_Look.png)
 
 ### Bollinger Bands
-![Bollinger Bands](stock-analyzer-web/Assets/Bollinger_Bands.png)
+![Bollinger Bands](stock-analyzer-web/assets/Bollinger_Bands.png)
 
 ### Ichimoku Cloud
-![Ichimoku Cloud](stock-analyzer-web/Assets/Ichimoku_Cloud.png)
+![Ichimoku Cloud](stock-analyzer-web/assets/Ichimoku_Cloud.png)
 
 ### MACD Divergence
-![MACD Divergence](stock-analyzer-web/Assets/MACD_Divergence.png)
+![MACD Divergence](stock-analyzer-web/assets/MACD_Divergence.png)
 
 ### Order Blocks
-![Order Blocks](stock-analyzer-web/Assets/Order_Blocks.png)
+![Order Blocks](stock-analyzer-web/assets/Order_Blocks.png)
 
 ### RSI Divergence
-![RSI Divergence](stock-analyzer-web/Assets/RSI_Divergence.png)
+![RSI Divergence](stock-analyzer-web/assets/RSI_Divergence.png)
 
 ### Support & Resistance
-![Support & Resistance](stock-analyzer-web/Assets/Support_Resistance.png)
+![Support & Resistance](stock-analyzer-web/assets/Support_Resistance.png)
 
 ---
 
