@@ -15,24 +15,6 @@ A modern **Flask-powered stock analysis dashboard** that combines multiple techn
 ### AAPL Scroll Look
 ![AAPL Scroll Look](stock-analyzer-web/assets/AAPL_Scroll_Look.png)
 
-### Bollinger Bands
-![Bollinger Bands](stock-analyzer-web/assets/Bollinger_Bands.png)
-
-### Ichimoku Cloud
-![Ichimoku Cloud](stock-analyzer-web/assets/Ichimoku_Cloud.png)
-
-### MACD Divergence
-![MACD Divergence](stock-analyzer-web/assets/MACD_Divergence.png)
-
-### Order Blocks
-![Order Blocks](stock-analyzer-web/assets/Order_Blocks.png)
-
-### RSI Divergence
-![RSI Divergence](stock-analyzer-web/assets/RSI_Divergence.png)
-
-### Support & Resistance
-![Support & Resistance](stock-analyzer-web/assets/Support_Resistance.png)
-
 ---
 
 ## Features
@@ -201,12 +183,36 @@ Searching for a ticker opens the complete analysis dashboard featuring:
 Stockex includes:
 
 * RSI
+  
+  ### RSI Divergence
+![RSI Divergence](stock-analyzer-web/assets/RSI_Divergence.png)
+
 * MACD
+  
+### MACD Divergence
+![MACD Divergence](stock-analyzer-web/assets/MACD_Divergence.png)
+
 * Bollinger Bands
+  
+  ### Bollinger Bands
+![Bollinger Bands](stock-analyzer-web/assets/Bollinger_Bands.png)
+
 * Ichimoku Cloud
+
+  ### Ichimoku Cloud
+![Ichimoku Cloud](stock-analyzer-web/assets/Ichimoku_Cloud.png)
+
 * Order Blocks
-* Fair Value Gaps
+
+### Order Blocks
+![Order Blocks](stock-analyzer-web/assets/Order_Blocks.png)
+  
 * Support & Resistance
+
+### Support & Resistance
+![Support & Resistance](stock-analyzer-web/assets/Support_Resistance.png)
+
+* Fair Value Gaps
 * Divergence Detection
 
 Each indicator exposes both:
