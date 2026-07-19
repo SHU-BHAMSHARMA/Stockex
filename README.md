@@ -1,1 +1,1 @@
-# stock_analyzer_no_node
+# Simply search for any stock, and Stockex takes care of the rest. It analyzes the chart using technical indicators like RSI, MACD, Ichimoku, and more, then brings everything together into one simple signal with an easy-to-understand momentum score. That way, you can quickly understand what the market is telling you and make your next move with more confidence.
