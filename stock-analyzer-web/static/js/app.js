@@ -356,7 +356,7 @@ function signalClass(sig) {
 
 function renderIndicatorGrid(indicators) {
   const el = document.getElementById("indicatorGrid");
-  const order = ["RSI", "MACD", "Bollinger", "Ichimoku", "OrderBlock", "SR", "Other"];
+  const order = ["RSI", "MACD", "Bollinger", "Ichimoku", "OrderBlock", "SR"];
   el.innerHTML = order.map(name => {
     const ind = indicators[name];
     if (!ind || ind.error) {
@@ -527,7 +527,9 @@ function renderVerdict(composite) {
   document.getElementById("verdictReason").textContent = composite.reason || "";
 
   const bEl = document.getElementById("verdictBreakdown");
-  bEl.innerHTML = (composite.breakdown || []).map(b => {
+  bEl.innerHTML = (composite.breakdown || [])
+    .filter(b => b.indicator !== "Other")
+    .map(b => {
     if (!b.included) {
       return `<div class="vb-row"><div class="vb-row-top"><span class="ind">${b.indicator}</span><span class="vb-excluded">excluded</span></div></div>`;
     }
